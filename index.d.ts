@@ -5,6 +5,13 @@ declare module "winmgr" {
         title: string;
     }
 
+    interface WindowRect {
+        x: number;
+        y: number;
+        width: number;
+        height: number;
+    }
+
     function getTitleList(): string[];
 
     function getProcessIdList(): number[];
@@ -14,5 +21,7 @@ declare module "winmgr" {
     function focusWindowByPid(pid: number): boolean;
 
     function focusWindowByName(name: string): boolean;
+
+    function getWindowRectByPid(pid: number): WindowRect;
 
 }

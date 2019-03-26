@@ -4,7 +4,8 @@ const {
     getTitleList,
     getProcessIdList,
     getWindowInfoList,
-    focusWindowByPid
+    focusWindowByPid,
+    getWindowRectByPid
 } = bindings('winmgr');
 
 function focusWindowByName(name) {
@@ -24,10 +25,27 @@ function focusWindowByName(name) {
     return false;
 }
 
+function getWindowRectByName(name) {
+
+    if (!name || typeof name !== 'string') {
+        throw Error('Error Argument Type');
+    }
+    const list = getWindowInfoList();
+
+    for (let info of list) {
+        if (String(info.title).includes(name)) {
+            return getWindowRectByPid(info.pid);
+        }
+    }
+
+}
+
 module.exports = {
     getTitleList,
     getProcessIdList,
     getWindowInfoList,
     focusWindowByPid,
-    focusWindowByName
+    focusWindowByName,
+    getWindowRectByPid,
+    getWindowRectByName
 }
